@@ -74,6 +74,69 @@ MaterialModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
+/***/ 3280:
+/*!*********************************************************************!*\
+  !*** ./node_modules/rxjs/dist/esm/internal/observable/fromEvent.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fromEvent": () => (/* binding */ fromEvent)
+/* harmony export */ });
+/* harmony import */ var _observable_innerFrom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../observable/innerFrom */ 4987);
+/* harmony import */ var _Observable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Observable */ 833);
+/* harmony import */ var _operators_mergeMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../operators/mergeMap */ 1353);
+/* harmony import */ var _util_isArrayLike__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/isArrayLike */ 9806);
+/* harmony import */ var _util_isFunction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/isFunction */ 2971);
+/* harmony import */ var _util_mapOneOrManyArgs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/mapOneOrManyArgs */ 8385);
+
+
+
+
+
+
+const nodeEventEmitterMethods = ['addListener', 'removeListener'];
+const eventTargetMethods = ['addEventListener', 'removeEventListener'];
+const jqueryMethods = ['on', 'off'];
+function fromEvent(target, eventName, options, resultSelector) {
+  if ((0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(options)) {
+    resultSelector = options;
+    options = undefined;
+  }
+  if (resultSelector) {
+    return fromEvent(target, eventName, options).pipe((0,_util_mapOneOrManyArgs__WEBPACK_IMPORTED_MODULE_1__.mapOneOrManyArgs)(resultSelector));
+  }
+  const [add, remove] = isEventTarget(target) ? eventTargetMethods.map(methodName => handler => target[methodName](eventName, handler, options)) : isNodeStyleEventEmitter(target) ? nodeEventEmitterMethods.map(toCommonHandlerRegistry(target, eventName)) : isJQueryStyleEventEmitter(target) ? jqueryMethods.map(toCommonHandlerRegistry(target, eventName)) : [];
+  if (!add) {
+    if ((0,_util_isArrayLike__WEBPACK_IMPORTED_MODULE_2__.isArrayLike)(target)) {
+      return (0,_operators_mergeMap__WEBPACK_IMPORTED_MODULE_3__.mergeMap)(subTarget => fromEvent(subTarget, eventName, options))((0,_observable_innerFrom__WEBPACK_IMPORTED_MODULE_4__.innerFrom)(target));
+    }
+  }
+  if (!add) {
+    throw new TypeError('Invalid event target');
+  }
+  return new _Observable__WEBPACK_IMPORTED_MODULE_5__.Observable(subscriber => {
+    const handler = (...args) => subscriber.next(1 < args.length ? args : args[0]);
+    add(handler);
+    return () => remove(handler);
+  });
+}
+function toCommonHandlerRegistry(target, eventName) {
+  return methodName => handler => target[methodName](eventName, handler);
+}
+function isNodeStyleEventEmitter(target) {
+  return (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.addListener) && (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.removeListener);
+}
+function isJQueryStyleEventEmitter(target) {
+  return (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.on) && (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.off);
+}
+function isEventTarget(target) {
+  return (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.addEventListener) && (0,_util_isFunction__WEBPACK_IMPORTED_MODULE_0__.isFunction)(target.removeEventListener);
+}
+
+/***/ }),
+
 /***/ 4844:
 /*!****************************************************************!*\
   !*** ./node_modules/rxjs/dist/esm/internal/operators/audit.js ***!
@@ -144,6 +207,64 @@ __webpack_require__.r(__webpack_exports__);
 
 function auditTime(duration, scheduler = _scheduler_async__WEBPACK_IMPORTED_MODULE_0__.asyncScheduler) {
   return (0,_audit__WEBPACK_IMPORTED_MODULE_1__.audit)(() => (0,_observable_timer__WEBPACK_IMPORTED_MODULE_2__.timer)(duration, scheduler));
+}
+
+/***/ }),
+
+/***/ 1989:
+/*!***********************************************************************!*\
+  !*** ./node_modules/rxjs/dist/esm/internal/operators/debounceTime.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "debounceTime": () => (/* binding */ debounceTime)
+/* harmony export */ });
+/* harmony import */ var _scheduler_async__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scheduler/async */ 6936);
+/* harmony import */ var _util_lift__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/lift */ 1944);
+/* harmony import */ var _OperatorSubscriber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./OperatorSubscriber */ 3945);
+
+
+
+function debounceTime(dueTime, scheduler = _scheduler_async__WEBPACK_IMPORTED_MODULE_0__.asyncScheduler) {
+  return (0,_util_lift__WEBPACK_IMPORTED_MODULE_1__.operate)((source, subscriber) => {
+    let activeTask = null;
+    let lastValue = null;
+    let lastTime = null;
+    const emit = () => {
+      if (activeTask) {
+        activeTask.unsubscribe();
+        activeTask = null;
+        const value = lastValue;
+        lastValue = null;
+        subscriber.next(value);
+      }
+    };
+    function emitWhenIdle() {
+      const targetTime = lastTime + dueTime;
+      const now = scheduler.now();
+      if (now < targetTime) {
+        activeTask = this.schedule(undefined, targetTime - now);
+        subscriber.add(activeTask);
+        return;
+      }
+      emit();
+    }
+    source.subscribe((0,_OperatorSubscriber__WEBPACK_IMPORTED_MODULE_2__.createOperatorSubscriber)(subscriber, value => {
+      lastValue = value;
+      lastTime = scheduler.now();
+      if (!activeTask) {
+        activeTask = scheduler.schedule(emitWhenIdle, dueTime);
+        subscriber.add(activeTask);
+      }
+    }, () => {
+      emit();
+      subscriber.complete();
+    }, undefined, () => {
+      lastValue = activeTask = null;
+    }));
+  });
 }
 
 /***/ }),
@@ -599,6 +720,26 @@ const TestTools = {
     return Object.keys(activeHandles).length;
   }
 };
+
+/***/ }),
+
+/***/ 4437:
+/*!******************************************************************!*\
+  !*** ./node_modules/rxjs/dist/esm/internal/util/isObservable.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "isObservable": () => (/* binding */ isObservable)
+/* harmony export */ });
+/* harmony import */ var _Observable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Observable */ 833);
+/* harmony import */ var _isFunction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isFunction */ 2971);
+
+
+function isObservable(obj) {
+  return !!obj && (obj instanceof _Observable__WEBPACK_IMPORTED_MODULE_0__.Observable || (0,_isFunction__WEBPACK_IMPORTED_MODULE_1__.isFunction)(obj.lift) && (0,_isFunction__WEBPACK_IMPORTED_MODULE_1__.isFunction)(obj.subscribe));
+}
 
 /***/ }),
 

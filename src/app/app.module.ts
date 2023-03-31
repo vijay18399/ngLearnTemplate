@@ -8,7 +8,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/app/environments/environment';
-import { QuillModule } from 'ngx-quill';
+
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LinksComponent } from './links/links.component';
 @NgModule({
@@ -24,7 +24,7 @@ import { LinksComponent } from './links/links.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    QuillModule.forRoot(),
+
   ],
   providers: [
     {

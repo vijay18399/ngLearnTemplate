@@ -6,10 +6,9 @@ import { TutorialListComponent } from './tutorial-list/tutorial-list.component';
 import { TutorialEditorComponent } from './tutorial-editor/tutorial-editor.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuillModule } from 'ngx-quill';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AdminRoutingModule } from './admin-routing.module';
-
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     FormsModule,
     MaterialModule,
     DragDropModule,
-    QuillModule,
+    QuillModule.forRoot(),
     ReactiveFormsModule,
     AdminRoutingModule
   ]
