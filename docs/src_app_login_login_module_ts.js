@@ -228,7 +228,7 @@ LoginFormComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0
   selectors: [["app-login-form"]],
   decls: 24,
   vars: 10,
-  consts: [[1, "login"], [1, "login-card"], ["mat-stroked-button", "", 1, "google-btn"], ["src", "assets/gicon.svg", "alt", ""], [3, "formGroup"], ["matInput", "", "formControlName", "email"], [4, "ngIf"], ["matInput", "", "type", "password", "formControlName", "password"], ["mat-raised-button", "", "color", "accent", 3, "disabled"], [1, "other"], ["routerLink", "/forgot-password", 4, "ngIf"], ["class", "link", 3, "click", 4, "ngIf"], ["routerLink", "/forgot-password"], [1, "link", 3, "click"], ["mat-raised-button", "", "color", "accent"]],
+  consts: [[1, "login"], [1, "login-card"], ["mat-stroked-button", "", 1, "google-btn"], ["src", "assets/gicon.svg", "alt", ""], [3, "formGroup"], ["matInput", "", "formControlName", "email"], [4, "ngIf"], ["matInput", "", "type", "password", "formControlName", "password"], ["mat-raised-button", "", "color", "accent", 3, "disabled"], [1, "other"], ["routerLink", "forgot-password", 4, "ngIf"], ["class", "link", 3, "click", 4, "ngIf"], ["routerLink", "forgot-password"], [1, "link", 3, "click"], ["mat-raised-button", "", "color", "accent"]],
   template: function LoginFormComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "mat-card", 1)(2, "div", 2);

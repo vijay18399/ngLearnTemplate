@@ -9,9 +9,12 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/app/environments/environment';
 import { QuillModule } from 'ngx-quill';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LinksComponent } from './links/links.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LinksComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,12 @@ import { QuillModule } from 'ngx-quill';
     BrowserAnimationsModule,
     QuillModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

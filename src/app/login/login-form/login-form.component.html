@@ -28,7 +28,7 @@
             <button [disabled]="!signupForm.valid" mat-raised-button color="accent">{{ isSignUp ? 'Sign Up':' Sign In'}}</button>
         </form>
         <div class="other">
-            <p routerLink="/forgot-password" *ngIf="!isSignUp">Forgot Password?? <span></span></p>
+            <p routerLink="forgot-password" *ngIf="!isSignUp">Forgot Password?? <span></span></p>
             <div *ngIf="isSignUp" (click)="isSignUp =false" class="link">Already have An Account <button
                     mat-raised-button color="accent"> Sign in</button></div>
             <div *ngIf="!isSignUp" (click)="isSignUp =true" class="link">Don't have An Account <button mat-raised-button
