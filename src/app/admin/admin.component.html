@@ -1,0 +1,35 @@
+
+   
+    <mat-toolbar class="top-bar" color="primary">
+        <div  class="brand">
+          <a class="logo"  routerLink="/dashboard" routerLinkActive="active"> <i class="fa fa-code"></i> ngLearn</a>
+        </div>
+     
+
+
+   
+       
+      </mat-toolbar>
+      
+      <div class="main-content">
+        <div class="left-bar">
+          <button routerLink="/dashboard" class="navBtn" mat-icon-button >
+            <mat-icon >local_library</mat-icon>
+            <label for="">Tutorials</label>
+          </button>
+          <button routerLink="users" class="navBtn" mat-icon-button >
+            <mat-icon >people</mat-icon>
+            <label for="">Users</label>
+          </button>
+          <button routerLink="editor" class="navBtn" mat-icon-button >
+            <mat-icon >mode_edit</mat-icon>
+            <label for="">Editor</label>
+          </button>
+        </div>
+      
+        <div class="page-content">
+     
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+  

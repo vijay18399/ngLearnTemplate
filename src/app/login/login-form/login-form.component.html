@@ -1,0 +1,43 @@
+<div class="login">
+    <mat-card class="login-card">
+        <div  mat-stroked-button class="google-btn" >
+            Continue with <img src="assets/gicon.svg" alt="">
+        </div>
+        <form [formGroup]="signupForm">
+
+            <mat-label>Email</mat-label>
+            <mat-form-field>
+
+                <input matInput formControlName="email">
+                <mat-error *ngIf="signupForm.get('email')?.dirty && signupForm.get('email')?.hasError('required')">Email
+                    is required</mat-error>
+                <mat-error *ngIf="signupForm.get('email')?.dirty && signupForm.get('email')?.hasError('email')">Invalid
+                    email address</mat-error>
+            </mat-form-field>
+            <mat-label>Password</mat-label>
+            <mat-form-field>
+                <input matInput type="password" formControlName="password">
+                <mat-error
+                    *ngIf="signupForm.get('password')?.dirty && signupForm.get('password')?.hasError('required')">Password
+                    is required</mat-error>
+                <mat-error
+                    *ngIf="signupForm.get('password')?.dirty && signupForm.get('password')?.hasError('minlength')">Password
+                    must be at least 6 Characters</mat-error>
+            </mat-form-field>
+
+            <button [disabled]="!signupForm.valid" mat-raised-button color="accent">{{ isSignUp ? 'Sign Up':' Sign In'}}</button>
+        </form>
+        <div class="other">
+            <p routerLink="/forgot-password" *ngIf="!isSignUp">Forgot Password?? <span></span></p>
+            <div *ngIf="isSignUp" (click)="isSignUp =false" class="link">Already have An Account <button
+                    mat-raised-button color="accent"> Sign in</button></div>
+            <div *ngIf="!isSignUp" (click)="isSignUp =true" class="link">Don't have An Account <button mat-raised-button
+                    color="accent"> Sign Up</button></div>
+
+             <!-- <button (click)="authService.GoogleAuth()" mat-raised-button color="primary" class="google-btn">
+                <div><i class="fa-brands fa-google"></i> Continue with Google</div>
+            </button> -->
+
+        </div>
+    </mat-card>
+</div>

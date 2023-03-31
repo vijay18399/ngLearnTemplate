@@ -1,0 +1,46 @@
+
+   
+    <mat-toolbar class="top-bar" color="primary">
+        <div  class="brand">
+          <button (click)="isSearchActive=false" *ngIf="isSearchActive" mat-icon-button class="menuBtn">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <!-- <button *ngIf="!isSearchActive" mat-icon-button class="menuBtn">
+            <mat-icon>menu</mat-icon>
+          </button> -->
+          <a class="logo" *ngIf="!isSearchActive" routerLink="/tutorials" routerLinkActive="active"> <i class="fa fa-code"></i> ngLearn</a>
+        </div>
+     
+        <div  id="searchBox">
+        <input  placeholder="Search" type="text">
+        <mat-icon>search</mat-icon>
+       </div>
+       <div *ngIf="isSearchActive"  id="mbsearchBox">
+        <input  placeholder="Search" type="text">
+        <mat-icon>search</mat-icon>
+       </div>
+        <div *ngIf="!isSearchActive"  class="buttons">
+          <button (click)="isSearchActive=true" id="searchBtn"  mat-icon-button> <mat-icon>search</mat-icon></button>  
+          <button mat-button >Login</button>
+        </div>
+       
+      </mat-toolbar>
+      
+      <div class="main-content">
+        <!-- <div class="left-bar">
+          <button routerLink="/tutorials" class="navBtn" mat-icon-button >
+            <mat-icon >local_library</mat-icon>
+            <label for="">Tutorials</label>
+          </button>
+          <button routerLink="/tutorials" class="navBtn" mat-icon-button >
+            <mat-icon >local_library</mat-icon>
+            <label for="">Tutorials</label>
+          </button>
+        </div> -->
+      
+        <div class="page-content">
+     
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+  

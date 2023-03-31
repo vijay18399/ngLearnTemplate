@@ -1,0 +1,48 @@
+<form [formGroup]="blogForm" class="container">
+    <mat-card *ngIf="!isContent" class="card">
+        <mat-form-field>
+            <mat-label>Blog Title</mat-label>
+            <input formControlName="title" matInput placeholder="Enter Title">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Blog Image URL</mat-label>
+            <input formControlName="image" matInput placeholder="Enter Image URL">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Blog About Section</mat-label>
+            <textarea formControlName="about" matInput
+                placeholder="Explain About Blog ">1600 Amphitheatre Pkwy</textarea>
+        </mat-form-field>
+
+        <button (click)="goContent()" mat-raised-button>Add Content</button>
+    </mat-card>
+    <div *ngIf="isContent" class="content-container">
+        <div class="sidenav">
+            <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="navList">
+                <mat-card  cdkDrag class="navItem" *ngFor="let content of contents.controls; let i = index"
+                    [class.selected]="i === selectedContentIndex" (click)="selectContent(i)" >
+                    <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+                     <p> {{ content.get('title')?.value }}</p> 
+                    <mat-icon color="warn" (click)="removeContent(i)" >delete</mat-icon>
+                </mat-card>
+            </div>
+            <div class="actions">
+                <button (click)="openPreview()"  mat-button> Preview </button>
+                <button  mat-button (click)="addContent()"> <mat-icon>add</mat-icon>Add Content </button>
+            </div>
+        </div>
+        <div *ngIf="!contents.controls.length" class="msg">
+           <p>Add Content First !!</p>
+        </div>
+        <form *ngIf="contents.controls.length" [formGroup]="selectedContent" class="content-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input formControlName="title" matInput placeholder="Enter  Content Title">
+            </mat-form-field>
+            <div class="form-group" >
+                <quill-editor [modules]="modules"   formControlName="content"></quill-editor>
+            </div>
+        </form>
+    </div>
+
+</form>

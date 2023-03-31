@@ -1,0 +1,156 @@
+mat-card {
+    max-width: 840px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-bottom: 64px;
+}
+
+mat-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+mat-card-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+mat-card-subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.sort {
+    padding: 0px 12px;
+    .btn{
+        padding: 4px 10px;
+        border-radius: 10px;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0px;
+        margin: 4px;
+    }
+}
+
+.card img {
+    width: 100%;
+    max-height: 400px;
+}
+
+mat-card-content {
+    padding: 16px;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+mat-icon {
+    margin-right: 4px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+
+    .comment-actions {
+        display: flex;
+    }
+
+    .listItem {
+        padding: 10px;
+        margin: 6px 12px;
+        display: flex;
+        border: 1px solid #9E9E9E;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: space-between;
+
+        .comment {
+            display: flex;
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                margin: 4px;
+            }
+        }
+
+        .comment-details {
+          h4{
+            margin: 0px;
+          }
+            p {
+                color: #6e6e6e;
+            }
+        }
+
+       
+    }
+}
+
+  
+  .login {
+    background-color: blueviolet;
+    border-radius: 10px;
+    padding: 6px;
+    color: aliceblue;
+    margin-bottom: 10px;
+  }
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .login {
+    background-color: blueviolet;
+    border-radius: 10px;
+    padding: 6px;
+    color: aliceblue;
+    margin-bottom: 10px;
+  }
+  
+  .commentBox {
+    position: relative;
+    width: 100%;
+  }
+  
+  .commentBox input {
+    background-color: #ececec;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 4px;
+    width: calc(100% - 40px);
+    color: black;
+    font-size: 16px;
+  }
+  .commentBox input:focus {
+   outline: 1px solid rgb(4, 120, 130);
+  }
+  .send-icon {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .send-icon i {
+    font-size: 20px;
+    color: #004d40;
+  }
+  
