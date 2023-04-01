@@ -27,4 +27,8 @@ import { QuillModule } from 'ngx-quill';
     AdminRoutingModule
   ]
 })
-export class AdminModule { }
+export class AdminModule { 
+  constructor(){
+    console.log("AdminModule")
+  }
+}

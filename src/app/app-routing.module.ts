@@ -5,7 +5,7 @@ import { TutorialModule } from './tutorial/tutorial.module';
 
 const routes: Routes = [
   {
-    path:'tutorials', loadChildren: () => import('./tutorial/tutorial.module').then(m => m.TutorialModule)
+    path:'tutorials', loadChildren: () => TutorialModule
   },
   {
     path:'dashboard', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)

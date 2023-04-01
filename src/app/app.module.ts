@@ -11,6 +11,7 @@ import { environment } from 'src/app/environments/environment';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LinksComponent } from './links/links.component';
+import { AdminModule } from './admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { LinksComponent } from './links/links.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    AdminModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
